@@ -1,0 +1,7 @@
+title: Monster benchmarks
+baseurl: "/monster-bench/"
+url: "https://ankit-iitb.github.io/monster-bench/"
+github_username: ankit-iitb 
+
+# Build settings
+markdown: kramdown
