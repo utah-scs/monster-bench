@@ -1,6 +1,6 @@
 [book]
-authors = ["Ankit Bhardwaj"]
+authors = ["Ankit Bhardwaj", "Md Ashfaqur Rahaman"]
 language = "en"
 multilingual = false
 src = "src"
-title = "docs"
+title = "Monster Documentation"
