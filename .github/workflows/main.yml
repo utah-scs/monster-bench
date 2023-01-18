@@ -19,8 +19,8 @@ jobs:
           rm -rf ../docs/*
           mdbook build -d ../docs
           cd ..
-          git config user.name "Ankit Bhardwaj"
-          git config user.email "bhrdwj.ankit@gmail.com"
+          git config user.name "Monster CI"
+          git config user.email "noreply@utah.systems"
           git add .
           git commit -a -m "Added documentation." || true
-          git push origin master || true
+          git push origin main || true
