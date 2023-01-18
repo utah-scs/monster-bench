@@ -9,7 +9,7 @@ layout: default
   <table class="post-table">
     <tr>
       <th>Date</th>
-      <th>Revision</th>
+      <th>Commit</th>
       <th>CREW</th>
       <th>EREW</th>
       <th>Comments</th>
@@ -17,12 +17,12 @@ layout: default
     {% for post in site.data.cloudlab %}
     <tr>
       <td>{{ post.date }}</td>
-      <td>{{ post.revision }}</td>
-      <td> {% if post.crcwbench %}
-        <a href="{{ site.baseurl }}crcw/cloudlab/{{ post.revision }}/{{ post.crcwbench }}">CRCW</a>{% endif %}
+      <td><a href="https://github.com/utah-scs/monster/tree/{{ post.revision }}">{{ post.revision }}</a></td>
+      <td> {% if post.crewbench %}
+        <a href="{{ site.baseurl }}/cloudlab/crew/{{ post.revision }}/{{ post.crewbench }}">CREW</a>{% endif %}
       </td>
       <td> {% if post.erewbench %}
-        <a href="{{ site.baseurl }}erew/cloudlab/{{ post.revision }}/{{ post.erewbench }}">EREW</a>{%
+        <a href="{{ site.baseurl }}/cloudlab/erew/{{ post.revision }}/{{ post.erewbench }}">EREW</a>{%
         endif %}
       </td>
       <td style="font-size:16px">{{ post.comments }}</td>
