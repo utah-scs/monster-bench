@@ -1,6 +1,6 @@
 ---
 layout: scalebench
-title: "CREW"
+title: "EREW"
 ---
 
 # Latency
