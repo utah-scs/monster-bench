@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="discussion.html"><strong aria-hidden="true">1.</strong> Discussions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Discussions/01-09-23.html"><strong aria-hidden="true">1.1.</strong> 01-09-23.md</a></li></ol></li><li class="chapter-item expanded "><a href="development.html"><strong aria-hidden="true">2.</strong> Development</a></li><li class="chapter-item expanded "><a href="related-works.html"><strong aria-hidden="true">3.</strong> Related-works</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="Contributors.html"><strong aria-hidden="true">4.</strong> Contributors</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="discussion.html"><strong aria-hidden="true">1.</strong> Discussions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Discussions/01-09-23.html"><strong aria-hidden="true">1.1.</strong> 01-09-23.md</a></li></ol></li><li class="chapter-item expanded "><a href="development.html"><strong aria-hidden="true">2.</strong> Development</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="development/pcap.html"><strong aria-hidden="true">2.1.</strong> PCAP-based Network Interface</a></li></ol></li><li class="chapter-item expanded "><a href="related-works.html"><strong aria-hidden="true">3.</strong> Related-works</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="Contributors.html"><strong aria-hidden="true">4.</strong> Contributors</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -165,6 +165,29 @@ Details of placement policies can be found in MICA paper.</li>
 <li>How core X will deallocate core Y’s memory?</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="development"><a class="header" href="#development">Development</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="pcap-based-network-interface"><a class="header" href="#pcap-based-network-interface">PCAP-based Network Interface</a></h1>
+<p>For development and testing, we can use pcap files as network interfaces.  It
+avoids the need to have physical interfaces and also allows us to generate
+traffic for testing.</p>
+<h2 id="generate-pcap-file"><a class="header" href="#generate-pcap-file">Generate pcap file</a></h2>
+<p><a href="https://github.com/utah-scs/monster/blob/main/common/src/pcap.rs">pcap.rs</a> in
+common provides a function to generate pcap file from a list of packets in
+/tmp/out.pcap.</p>
+<pre><code class="language-bash">cd common
+cargo test
+</code></pre>
+<h2 id="server-use-pcap-files-as-interface"><a class="header" href="#server-use-pcap-files-as-interface">Server: Use pcap files as interface</a></h2>
+<pre><code class="language-bash">cd server
+cargo run --features debug
+</code></pre>
+<p>For now the configuration assumes that the RX interface is using
+/tmp/input.pcap and the TX interface is using /tmp/out.pcap.</p>
+<p>So you can generate the pcap file using the above command and use it as input to
+the server. Copy the same file to /tmp/out.pcap and use it as output or create a
+new pcap file with a pcap header.</p>
+<h2 id="analyze-pcap-file-using-tcpdump"><a class="header" href="#analyze-pcap-file-using-tcpdump">Analyze pcap file using tcpdump</a></h2>
+<pre><code class="language-bash">sudo tcpdump -nvvvX -r /tmp/input.pcap
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="related-works"><a class="header" href="#related-works">Related-works</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="contributors"><a class="header" href="#contributors">Contributors</a></h1>
 <p>Here is a list of the contributors who helped to build Monster DB.</p>

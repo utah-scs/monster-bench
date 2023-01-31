@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Discussions - Monster Documentation</title>
+        <title>PCAP-based Network Interface - Monster Documentation</title>
 
 
         <!-- Custom HTML head -->
@@ -12,21 +12,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        <link rel="icon" href="favicon.svg">
-        <link rel="shortcut icon" href="favicon.png">
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        <link rel="stylesheet" href="fonts/fonts.css">
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
@@ -34,7 +34,7 @@
     <body>
         <!-- Provide site root to javascript -->
         <script>
-            var path_to_root = "";
+            var path_to_root = "../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
@@ -80,7 +80,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="discussion.html" class="active"><strong aria-hidden="true">1.</strong> Discussions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Discussions/01-09-23.html"><strong aria-hidden="true">1.1.</strong> 01-09-23.md</a></li></ol></li><li class="chapter-item expanded "><a href="development.html"><strong aria-hidden="true">2.</strong> Development</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="development/pcap.html"><strong aria-hidden="true">2.1.</strong> PCAP-based Network Interface</a></li></ol></li><li class="chapter-item expanded "><a href="related-works.html"><strong aria-hidden="true">3.</strong> Related-works</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="Contributors.html"><strong aria-hidden="true">4.</strong> Contributors</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../discussion.html"><strong aria-hidden="true">1.</strong> Discussions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Discussions/01-09-23.html"><strong aria-hidden="true">1.1.</strong> 01-09-23.md</a></li></ol></li><li class="chapter-item expanded "><a href="../development.html"><strong aria-hidden="true">2.</strong> Development</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../development/pcap.html" class="active"><strong aria-hidden="true">2.1.</strong> PCAP-based Network Interface</a></li></ol></li><li class="chapter-item expanded "><a href="../related-works.html"><strong aria-hidden="true">3.</strong> Related-works</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="../Contributors.html"><strong aria-hidden="true">4.</strong> Contributors</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -112,7 +112,7 @@
                     <h1 class="menu-title">Monster Documentation</h1>
 
                     <div class="right-buttons">
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
 
@@ -141,14 +141,39 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="discussions"><a class="header" href="#discussions">Discussions</a></h1>
+                        <h1 id="pcap-based-network-interface"><a class="header" href="#pcap-based-network-interface">PCAP-based Network Interface</a></h1>
+<p>For development and testing, we can use pcap files as network interfaces.  It
+avoids the need to have physical interfaces and also allows us to generate
+traffic for testing.</p>
+<h2 id="generate-pcap-file"><a class="header" href="#generate-pcap-file">Generate pcap file</a></h2>
+<p><a href="https://github.com/utah-scs/monster/blob/main/common/src/pcap.rs">pcap.rs</a> in
+common provides a function to generate pcap file from a list of packets in
+/tmp/out.pcap.</p>
+<pre><code class="language-bash">cd common
+cargo test
+</code></pre>
+<h2 id="server-use-pcap-files-as-interface"><a class="header" href="#server-use-pcap-files-as-interface">Server: Use pcap files as interface</a></h2>
+<pre><code class="language-bash">cd server
+cargo run --features debug
+</code></pre>
+<p>For now the configuration assumes that the RX interface is using
+/tmp/input.pcap and the TX interface is using /tmp/out.pcap.</p>
+<p>So you can generate the pcap file using the above command and use it as input to
+the server. Copy the same file to /tmp/out.pcap and use it as output or create a
+new pcap file with a pcap header.</p>
+<h2 id="analyze-pcap-file-using-tcpdump"><a class="header" href="#analyze-pcap-file-using-tcpdump">Analyze pcap file using tcpdump</a></h2>
+<pre><code class="language-bash">sudo tcpdump -nvvvX -r /tmp/input.pcap
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../development.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
 
-                            <a rel="next" href="Discussions/01-09-23.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../related-works.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -158,8 +183,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../development.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
 
-                    <a rel="next" href="Discussions/01-09-23.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../related-works.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
@@ -174,13 +202,13 @@
         </script>
 
 
-        <script src="elasticlunr.min.js"></script>
-        <script src="mark.min.js"></script>
-        <script src="searcher.js"></script>
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
 
-        <script src="clipboard.min.js"></script>
-        <script src="highlight.js"></script>
-        <script src="book.js"></script>
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
 
