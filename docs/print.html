@@ -84,7 +84,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="discussion.html"><strong aria-hidden="true">1.</strong> Discussions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Discussions/01-09-23.html"><strong aria-hidden="true">1.1.</strong> 01-09-23.md</a></li></ol></li><li class="chapter-item expanded "><a href="development.html"><strong aria-hidden="true">2.</strong> Development</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="development/pcap.html"><strong aria-hidden="true">2.1.</strong> PCAP-based Network Interface</a></li></ol></li><li class="chapter-item expanded "><a href="related-works.html"><strong aria-hidden="true">3.</strong> Related-works</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="Contributors.html"><strong aria-hidden="true">4.</strong> Contributors</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="discussion.html"><strong aria-hidden="true">1.</strong> Discussions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Discussions/01-09-23.html"><strong aria-hidden="true">1.1.</strong> 01-09-23.md</a></li><li class="chapter-item expanded "><a href="Discussions/05-15-23.html"><strong aria-hidden="true">1.2.</strong> 05-15-23.md</a></li></ol></li><li class="chapter-item expanded "><a href="development.html"><strong aria-hidden="true">2.</strong> Development</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="development/pcap.html"><strong aria-hidden="true">2.1.</strong> PCAP-based Network Interface</a></li></ol></li><li class="chapter-item expanded "><a href="related-works.html"><strong aria-hidden="true">3.</strong> Related-works</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="Contributors.html"><strong aria-hidden="true">4.</strong> Contributors</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -166,6 +166,29 @@ Details of placement policies can be found in MICA paper.</li>
 <ul>
 <li>What will be the design of shared memory allocator?</li>
 <li>How core X will deallocate core Y’s memory?</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><ul>
+<li>DPDK noop is running, both client and server
+<ul>
+<li>8 Mpps per core</li>
+<li>YCSB already in client but hasn't been verified</li>
+<li>TODO verify YCSB distribution, etc</li>
+</ul>
+</li>
+<li>TODO Need to automate running of client/server
+<ul>
+<li>Start at <code>scripts/ci.bash</code> and fill in the 'Run benchmarks' part</li>
+</ul>
+</li>
+<li><a href="https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners">Github self-hosted runner docs</a></li>
+<li>Using CloudLab c6420s, have a &quot;large&quot; number of cores</li>
+<li>Primary/secondary processes for DPDK
+<ul>
+<li>Need multiple DPDK apps on same machine</li>
+<li>https://doc.dpdk.org/guides/prog_guide/multi_proc_support.html</li>
+</ul>
+</li>
+<li><code>trait Table</code>: Can we get rid of need for per Table instance handlers?</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="development"><a class="header" href="#development">Development</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="pcap-based-network-interface"><a class="header" href="#pcap-based-network-interface">PCAP-based Network Interface</a></h1>
