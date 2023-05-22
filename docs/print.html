@@ -84,7 +84,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="discussion.html"><strong aria-hidden="true">1.</strong> Discussions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Discussions/01-09-23.html"><strong aria-hidden="true">1.1.</strong> 01-09-23.md</a></li><li class="chapter-item expanded "><a href="Discussions/05-15-23.html"><strong aria-hidden="true">1.2.</strong> 05-15-23.md</a></li></ol></li><li class="chapter-item expanded "><a href="development.html"><strong aria-hidden="true">2.</strong> Development</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="development/pcap.html"><strong aria-hidden="true">2.1.</strong> PCAP-based Network Interface</a></li></ol></li><li class="chapter-item expanded "><a href="related-works.html"><strong aria-hidden="true">3.</strong> Related-works</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="Contributors.html"><strong aria-hidden="true">4.</strong> Contributors</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="discussion.html"><strong aria-hidden="true">1.</strong> Discussions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Discussions/01-09-23.html"><strong aria-hidden="true">1.1.</strong> 01-09-23.md</a></li><li class="chapter-item expanded "><a href="Discussions/05-15-23.html"><strong aria-hidden="true">1.2.</strong> 05-15-23.md</a></li><li class="chapter-item expanded "><a href="Discussions/05-17-23.html"><strong aria-hidden="true">1.3.</strong> 05-17-23.md</a></li></ol></li><li class="chapter-item expanded "><a href="development.html"><strong aria-hidden="true">2.</strong> Development</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="development/pcap.html"><strong aria-hidden="true">2.1.</strong> PCAP-based Network Interface</a></li></ol></li><li class="chapter-item expanded "><a href="related-works.html"><strong aria-hidden="true">3.</strong> Related-works</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="Contributors.html"><strong aria-hidden="true">4.</strong> Contributors</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -190,6 +190,29 @@ Details of placement policies can be found in MICA paper.</li>
 </li>
 <li><code>trait Table</code>: Can we get rid of need for per Table instance handlers?</li>
 <li>Multi threaded client/server</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h3 id="baselines"><a class="header" href="#baselines">Baselines</a></h3>
+<h4 id="client-assisted-request-routing-erew"><a class="header" href="#client-assisted-request-routing-erew">Client assisted request routing (EREW)</a></h4>
+<ul>
+<li>Keys will be partitioned statically and optimally.</li>
+<li>Clients will be responsible for sending request to the correct server/core.</li>
+<li>Cores only access local memory.</li>
+<li>Needs reconfiguration of partitions and migration of data if skew changes.</li>
+<li>Clients need to be informed on reconfiguration.</li>
+<li>Approximate processing time per request: 200 ns for hash table access on local memory + 1400 cycles for DPDK packet processing.</li>
+</ul>
+<h4 id="server-assisted-request-routing-shared-only"><a class="header" href="#server-assisted-request-routing-shared-only">Server assisted request routing (shared only)</a></h4>
+<ul>
+<li>Full Hashtable lives in shared memory.</li>
+<li>Client oblivious routing. Clients can send requests to any server.</li>
+<li>Assumes no key partitioning.</li>
+<li>Skew resistance. No reconfiguration and data migration.</li>
+<li>Approximate processing time per request: 400ns for hash table access on remote memory + 1400 cycles for DPDP packet processing.</li>
+</ul>
+<h4 id="discussion"><a class="header" href="#discussion">Discussion</a></h4>
+<ul>
+<li>Client assisted routing is only marginally better than server assisted shared only model.</li>
+<li>In both cases assumes no memory latency hiding techniques. (e.g: Pipelined memory access)</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="development"><a class="header" href="#development">Development</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="pcap-based-network-interface"><a class="header" href="#pcap-based-network-interface">PCAP-based Network Interface</a></h1>
