@@ -1,8 +1,16 @@
 # Discussions
 
-## 05-22-23 ##
+## 06-05-23 ##
 
-# 5/22/23
+* Combination of EREW and CREW can be used to reduce gap between them.
+* Why write only workload is scaling more that read only workload in case of EREW?
+* When bucket becomes a problem? Find out the optimum number of buckets.
+* Implement lock free hash table to reduce gap between EREW and CREW.
+* Implement OCC for reads
+* Implement request batching and test end to end. Start with end-to-end noop table.
+* Graph for all the ycsb workloads.
+
+## 05-22-23 ##
 
 - Ankit Q: Trees might make more sense since data deps amp differences in memory latency
 - TODOs for CI/experiment runner
