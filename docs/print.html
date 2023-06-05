@@ -84,7 +84,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="discussion.html"><strong aria-hidden="true">1.</strong> Discussions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Discussions/01-09-23.html"><strong aria-hidden="true">1.1.</strong> 01-09-23.md</a></li><li class="chapter-item expanded "><a href="Discussions/05-15-23.html"><strong aria-hidden="true">1.2.</strong> 05-15-23.md</a></li><li class="chapter-item expanded "><a href="Discussions/05-17-23.html"><strong aria-hidden="true">1.3.</strong> 05-17-23.md</a></li><li class="chapter-item expanded "><a href="Discussions/05-22-23.html"><strong aria-hidden="true">1.4.</strong> 05-22-23.md</a></li></ol></li><li class="chapter-item expanded "><a href="development.html"><strong aria-hidden="true">2.</strong> Development</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="development/pcap.html"><strong aria-hidden="true">2.1.</strong> PCAP-based Network Interface</a></li></ol></li><li class="chapter-item expanded "><a href="related-works.html"><strong aria-hidden="true">3.</strong> Related-works</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="Contributors.html"><strong aria-hidden="true">4.</strong> Contributors</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="discussion.html"><strong aria-hidden="true">1.</strong> Discussions</a></li><li class="chapter-item expanded "><a href="development.html"><strong aria-hidden="true">2.</strong> Development</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="development/pcap.html"><strong aria-hidden="true">2.1.</strong> PCAP-based Network Interface</a></li></ol></li><li class="chapter-item expanded "><a href="related-works.html"><strong aria-hidden="true">3.</strong> Related-works</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="Contributors.html"><strong aria-hidden="true">4.</strong> Contributors</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -146,52 +146,22 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="discussions"><a class="header" href="#discussions">Discussions</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h3 id="benchmarks"><a class="header" href="#benchmarks">Benchmarks</a></h3>
+<h2 id="05-22-23"><a class="header" href="#05-22-23">05-22-23</a></h2>
+<h1 id="52223"><a class="header" href="#52223">5/22/23</a></h1>
 <ul>
-<li>All ycsb benchmarks including the latest one.</li>
+<li>Ankit Q: Trees might make more sense since data deps amp differences in memory latency</li>
+<li>TODOs for CI/experiment runner</li>
+<li>Rework CI to put runner in /proj so new runners work even after more than 1 hour</li>
+<li>Script to run client/server and collect results</li>
+<li>Need to decide how toml files are structured</li>
+<li>Ashfaq: trying to run it, but not getting responses back from server</li>
+<li>Ankit: probably because not using the client hw mac address</li>
+<li>TODOs on running experiments</li>
+<li>Swap TOML args on client/server so that can run/configure them from commandline</li>
+<li>Create run.py that can run client/server (across SSH where needed)</li>
 </ul>
-<h3 id="design"><a class="header" href="#design">Design</a></h3>
-<ul>
-<li>Hash table design can be in two parts: Shared hash map and thead local hash map</li>
-<li>Or One big hash table interface which will include both shared hashmap and local hashmap</li>
-<li>Experiment  with different memory placement policies (CREW, EREW, CRCW).
-Details of placement policies can be found in MICA paper.</li>
-<li>One queue pair per NUMA node for shared memory.</li>
-<li>Allocation: NIC receives the packets, DMA to local memory and then copied to shared memory.</li>
-<li>New writes will always be in local memory.</li>
-<li>After first write when the key will be read it will be moved to shared memory.</li>
-<li>Look up will be in parallel in both shared and local memory.</li>
-</ul>
-<h3 id="questions"><a class="header" href="#questions">Questions</a></h3>
-<ul>
-<li>What will be the design of shared memory allocator?</li>
-<li>How core X will deallocate core Y’s memory?</li>
-</ul>
-<div style="break-before: page; page-break-before: always;"></div><ul>
-<li>DPDK noop is running, both client and server
-<ul>
-<li>8 Mpps per core</li>
-<li>YCSB already in client but hasn't been verified</li>
-<li>TODO verify YCSB distribution, etc</li>
-</ul>
-</li>
-<li>TODO Need to automate running of client/server
-<ul>
-<li>Start at <code>scripts/ci.bash</code> and fill in the 'Run benchmarks' part</li>
-</ul>
-</li>
-<li><a href="https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners">Github self-hosted runner docs</a></li>
-<li>Using CloudLab c6420s, have a &quot;large&quot; number of cores</li>
-<li>Primary/secondary processes for DPDK
-<ul>
-<li>Need multiple DPDK apps on same machine</li>
-<li>https://doc.dpdk.org/guides/prog_guide/multi_proc_support.html</li>
-</ul>
-</li>
-<li><code>trait Table</code>: Can we get rid of need for per Table instance handlers?</li>
-<li>Multi threaded client/server</li>
-</ul>
-<div style="break-before: page; page-break-before: always;"></div><h3 id="baselines"><a class="header" href="#baselines">Baselines</a></h3>
+<h2 id="05-17-23"><a class="header" href="#05-17-23">05-17-23</a></h2>
+<h3 id="baselines"><a class="header" href="#baselines">Baselines</a></h3>
 <h4 id="client-assisted-request-routing-erew"><a class="header" href="#client-assisted-request-routing-erew">Client assisted request routing (EREW)</a></h4>
 <ul>
 <li>Keys will be partitioned statically and optimally.</li>
@@ -214,18 +184,52 @@ Details of placement policies can be found in MICA paper.</li>
 <li>Client assisted routing is only marginally better than server assisted shared only model.</li>
 <li>In both cases assumes no memory latency hiding techniques. (e.g: Pipelined memory access)</li>
 </ul>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="52223"><a class="header" href="#52223">5/22/23</a></h1>
+<h2 id="05-15-23"><a class="header" href="#05-15-23">05-15-23</a></h2>
 <ul>
-<li>Ankit Q: Trees might make more sense since data deps amp differences in memory latency</li>
-<li>TODOs for CI/experiment runner</li>
-<li>Rework CI to put runner in /proj so new runners work even after more than 1 hour</li>
-<li>Script to run client/server and collect results</li>
-<li>Need to decide how toml files are structured</li>
-<li>Ashfaq: trying to run it, but not getting responses back from server</li>
-<li>Ankit: probably because not using the client hw mac address</li>
-<li>TODOs on running experiments</li>
-<li>Swap TOML args on client/server so that can run/configure them from commandline</li>
-<li>Create run.py that can run client/server (across SSH where needed)</li>
+<li>dpdk noop is running, both client and server
+<ul>
+<li>8 mpps per core</li>
+<li>ycsb already in client but hasn't been verified</li>
+<li>todo verify ycsb distribution, etc</li>
+</ul>
+</li>
+<li>todo need to automate running of client/server
+<ul>
+<li>start at <code>scripts/ci.bash</code> and fill in the 'run benchmarks' part</li>
+</ul>
+</li>
+<li><a href="https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners">github self-hosted runner docs</a></li>
+<li>using cloudlab c6420s, have a &quot;large&quot; number of cores</li>
+<li>primary/secondary processes for dpdk
+<ul>
+<li>need multiple dpdk apps on same machine</li>
+<li>https://doc.dpdk.org/guides/prog_guide/multi_proc_support.html</li>
+</ul>
+</li>
+<li><code>trait table</code>: can we get rid of need for per table instance handlers?</li>
+<li>multi threaded client/server</li>
+</ul>
+<h2 id="01-09-23"><a class="header" href="#01-09-23">01-09-23</a></h2>
+<h3 id="benchmarks"><a class="header" href="#benchmarks">Benchmarks</a></h3>
+<ul>
+<li>All ycsb benchmarks including the latest one.</li>
+</ul>
+<h3 id="design"><a class="header" href="#design">Design</a></h3>
+<ul>
+<li>Hash table design can be in two parts: Shared hash map and thead local hash map</li>
+<li>Or One big hash table interface which will include both shared hashmap and local hashmap</li>
+<li>Experiment  with different memory placement policies (CREW, EREW, CRCW).
+Details of placement policies can be found in MICA paper.</li>
+<li>One queue pair per NUMA node for shared memory.</li>
+<li>Allocation: NIC receives the packets, DMA to local memory and then copied to shared memory.</li>
+<li>New writes will always be in local memory.</li>
+<li>After first write when the key will be read it will be moved to shared memory.</li>
+<li>Look up will be in parallel in both shared and local memory.</li>
+</ul>
+<h3 id="questions"><a class="header" href="#questions">Questions</a></h3>
+<ul>
+<li>What will be the design of shared memory allocator?</li>
+<li>How core X will deallocate core Y’s memory?</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="development"><a class="header" href="#development">Development</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="pcap-based-network-interface"><a class="header" href="#pcap-based-network-interface">PCAP-based Network Interface</a></h1>
