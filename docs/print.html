@@ -146,6 +146,26 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="discussions"><a class="header" href="#discussions">Discussions</a></h1>
+<h2 id="06-14-23"><a class="header" href="#06-14-23">06-14-23</a></h2>
+<h3 id="todo"><a class="header" href="#todo">TODO</a></h3>
+<ul>
+<li><input disabled="" type="checkbox"/>
+NR log SPSC on different NUMA node with varying batch size.</li>
+<li><input disabled="" type="checkbox"/>
+Request batching in client/server. Result for varying batch sizes.</li>
+<li><input disabled="" type="checkbox"/>
+Bloomfilter size for 20M keys to track hot set.</li>
+</ul>
+<h3 id="notes"><a class="header" href="#notes">Notes</a></h3>
+<ul>
+<li>Representing hot set (i) Skew (ii) Stability of hot set.</li>
+<li>Bloomfilters can be used to implement client assisted routing.
+Bloomfilters will be used to track hot set and send that information to client.</li>
+<li>Alternative approach might be installing eSwitch to implement client assisted routing.</li>
+<li>What is the relative cost to cross core communication vs hashtable access?</li>
+<li>Win for shared memory if cost of cross core communication isn't high.</li>
+<li>Comparison between lock free hashtable and EREW.</li>
+</ul>
 <h2 id="06-05-23"><a class="header" href="#06-05-23">06-05-23</a></h2>
 <ul>
 <li>Combination of EREW and CREW can be used to reduce gap between them.</li>
