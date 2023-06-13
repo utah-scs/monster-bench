@@ -1,5 +1,23 @@
 # Discussions
 
+## 06-14-23 ##
+
+### TODO ##
+
+- [ ] NR log SPSC on different NUMA node with varying batch size.
+- [ ] Request batching in client/server. Result for varying batch sizes.
+- [ ] Bloomfilter size for 20M keys to track hot set.
+
+### Notes ###
+
+* Representing hot set (i) Skew (ii) Stability of hot set.
+* Bloomfilters can be used to implement client assisted routing.
+Bloomfilters will be used to track hot set and send that information to client.
+* Alternative approach might be installing eSwitch to implement client assisted routing.
+* What is the relative cost to cross core communication vs hashtable access?
+* Win for shared memory if cost of cross core communication isn't high.
+* Comparison between lock free hashtable and EREW.
+
 ## 06-05-23 ##
 
 * Combination of EREW and CREW can be used to reduce gap between them.
